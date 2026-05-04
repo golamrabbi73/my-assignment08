@@ -1,7 +1,7 @@
 "use client";
 import { Menu, X } from "lucide-react";
-import Link from "next/link"
 import React, { useState } from 'react'
+import Navlink from "../navlink/Navlink";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -13,18 +13,18 @@ const Navbar = () => {
           
           {/* left logo */}
           <div>
-            <Link href='/'>
+            <Navlink href={"/"}>
               <h1 className="text-xl font-bold tracking-wide">
                 Tile<span className="text-blue-500">Gallery</span>
               </h1>
-            </Link>
+            </Navlink>
           </div>
 
           {/* centre - menu for desktop */}
           <div className='hidden md:flex gap-8 font-medium'>
-            <Link href="/">Home</Link>
-            <Link href="/tiles">All Tiles</Link>
-            <Link href="/profile">My Profile</Link>
+            <Navlink href='/'>Home</Navlink>
+            <Navlink href="/all-tiles">All Tiles</Navlink>
+            <Navlink href="/profile">My Profile</Navlink>
           </div >
           
 
@@ -32,14 +32,14 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-4">
             {
               !user? (
-                <Link href="">
+                <Navlink href="/login">
                   Login
-                </Link>
+                </Navlink>
               ) : (
                 <>
-                  <Link>
+                  <Navlink>
                     Profile
-                  </Link>
+                  </Navlink>
                   <button>
                     Logout
                   </button>
@@ -60,20 +60,20 @@ const Navbar = () => {
         {
           open && (
             <div className="md:hidden mt-4 flex flex-col gap-4 bg-gray-800 p-4 rounded-lg">
-              <Link href="/" onClick={() => setOpen(false)}>Home</Link>
-              <Link href="/tiles" onClick={() => setOpen(false)}>All Tiles</Link>
-              <Link href="/profile" onClick={() => setOpen(false)}>My Profile</Link>
+              <Navlink href="/" onClick={() => setOpen(false)}>Home</Navlink>
+              <Navlink href="/tiles" onClick={() => setOpen(false)}>All Tiles</Navlink>
+              <Navlink href="/profile" onClick={() => setOpen(false)}>My Profile</Navlink>
 
               {
                 !user? (
-                  <Link href="/login" onClick={() => setOpen(false)}>
+                  <Navlink href="/login" onClick={() => setOpen(false)}>
                     Login
-                  </Link>
+                  </Navlink>
                 ) : (
                   <>
-                    <Link href="/profile" onClick={() => setOpen(false)}>
+                    <Navlink href="/profile" onClick={() => setOpen(false)}>
                       Profile
-                    </Link>
+                    </Navlink>
                     <button>
                       Logout
                     </button>
