@@ -10,19 +10,33 @@ const MyProfile = () => {
 
     useEffect(() => {
         if(!isPending && !user){
-            router.replace("/login");
+            const timer = setTimeout(() => {
+                router.replace("/login");
+            }, 500);
+
+            return () => clearTimeout(timer);
         }
     }, [user, isPending, router]);
 
     if(isPending){
-        return <p className='text-center mt-10'>Loading...</p>;
-    }
+        return <p className='text-center mt-10'>
+                    <span className="loading loading-spinner loading-sm"></span>
+                </p>;
+            }
 
-    if(!user) return null;
+    if(!user) {
+        return (
+            <div className='text-center mt-20 text-red-500 font-medium'>
+                You are not logged in. Please login first...
+            </div>
+        )
+    };
 
   return (
     <div>
-       My profile
+       <h1>My Profile</h1>
+       <p>Name: {user.name}</p>
+       <p>Email: {user.email}</p>
     </div>
   )
 }
