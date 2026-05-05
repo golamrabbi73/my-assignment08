@@ -2,10 +2,22 @@
 import { Menu, X } from "lucide-react";
 import React, { useState } from 'react'
 import Navlink from "../navlink/Navlink";
+import { authClient } from "@/lib/auth-client";
+import userAvatar from "@/assest/user.png";
+import Link from "next/link";
+import Image from "next/image";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const user = null;
+  // const users = null;
+
+  const { data: session, isPending } = authClient.useSession();
+  const user = session?.user;
+
+  const handleLogout = async () => {
+    await authClient.signOut();
+  }
+
   return (
     <>
       <nav className="navbar bg-base-100 shadow-sm">
@@ -24,27 +36,29 @@ const Navbar = () => {
           <div className='hidden md:flex gap-8 font-medium'>
             <Navlink href='/'>Home</Navlink>
             <Navlink href="/all-tiles">All Tiles</Navlink>
-            <Navlink href="/profile">My Profile</Navlink>
+            <Navlink href="/my-profile">My Profile</Navlink>
           </div >
           
 
           {/* right - auth for desk */}
           <div className="hidden md:flex items-center gap-4">
-            {
-              !user? (
-                <Navlink href="/login">
-                  Login
-                </Navlink>
+            {isPending ? <span className="loading loading-spinner loading-sm"></span> : user ? (
+              <>
+                <h3>Hello, {user?.name}</h3>
+                <Link href={"/my-profile"}>
+                  <Image
+                  src={user?.image || userAvatar} 
+                  alt="User avatar" 
+                  width={35}
+                  height={35}
+                />
+                </Link>
+
+                <button onClick={handleLogout}>Logout</button>
+              </>
               ) : (
-                <>
-                  <Navlink>
-                    Profile
-                  </Navlink>
-                  <button>
-                    Logout
-                  </button>
-                </>
-              )
+                    <Link href={"/login"}>Login</Link>
+                  )
             }
           </div>
           
@@ -61,7 +75,7 @@ const Navbar = () => {
           open && (
             <div className="md:hidden mt-4 flex flex-col gap-4 bg-gray-800 p-4 rounded-lg">
               <Navlink href="/" onClick={() => setOpen(false)}>Home</Navlink>
-              <Navlink href="/tiles" onClick={() => setOpen(false)}>All Tiles</Navlink>
+              <Navlink href="/all-tiles" onClick={() => setOpen(false)}>All Tiles</Navlink>
               <Navlink href="/profile" onClick={() => setOpen(false)}>My Profile</Navlink>
 
               {
