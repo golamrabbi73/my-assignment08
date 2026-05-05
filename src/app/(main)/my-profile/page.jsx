@@ -1,5 +1,6 @@
 'use client'
 import { authClient } from '@/lib/auth-client'
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react'
 
@@ -34,9 +35,9 @@ const MyProfile = () => {
 
   return (
     <div>
-       <h1>My Profile</h1>
-       <p>Name: {user.name}</p>
-       <p>Email: {user.email}</p>
+       <h1>My Profile</h1>;
+       <p>Name: {user.name}</p>;
+       <p>Email: {user.email}</p>;
     </div>
   )
 }

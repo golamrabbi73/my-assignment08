@@ -20,7 +20,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="navbar bg-base-100 shadow-sm">
+      <nav className="navbar sticky top-0 z-50 bg-base-100 shadow-sm">
         <div className="w-full flex items-center justify-between">
           
           {/* left logo */}
@@ -49,15 +49,15 @@ const Navbar = () => {
                   <Image
                   src={user?.image || userAvatar} 
                   alt="User avatar" 
-                  width={35}
-                  height={35}
+                  width={40}
+                  height={40}
                 />
                 </Link>
 
-                <button onClick={handleLogout}>Logout</button>
+                <button className="btn btn-error cursor-pointer" onClick={handleLogout}>Logout</button>
               </>
               ) : (
-                    <Link href={"/login"}>Login</Link>
+                    <Link className="btn btn-primary" href={"/login"}>Login</Link>
                   )
             }
           </div>

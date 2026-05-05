@@ -15,12 +15,12 @@ const AllTilesPage = async() => {
     console.log(tiles)
   return (
     <>
-        <section className='container mx-auto'>
-            <h2 className='text-2xl md:text-3xl lg:text-4xl font-semibold text-center mb-8 md:mb-10'>Featured Tiles</h2>
+        <section className='container mx-auto mt-10'>
+            <h2 className='text-2xl md:text-3xl lg:text-4xl font-semibold text-center mb-8 md:mb-10'>All Tiles</h2>
 
             <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6'>
                 {
-                    tiles.slice(0, 4).map((tile) => (
+                    tiles.map((tile) => (
                         <div key={tiles.id} className='border rounded-xl overflow-hidden hover:shadow-xl transition bg-white'>
                             <img src={tile.image} alt={tile.title} className='w-full h-40 sm:h-44 md:h-48 object-cover'/>
 
